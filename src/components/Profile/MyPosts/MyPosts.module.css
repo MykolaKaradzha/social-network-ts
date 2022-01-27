@@ -1,0 +1,11 @@
+.main {
+  padding: 5px;
+  background: gainsboro;
+  grid-area: main;
+}
+.main .wallpaper {
+  width: 800px;
+  height: 300px;
+}
+
+/*# sourceMappingURL=MyPosts.module.css.map */
