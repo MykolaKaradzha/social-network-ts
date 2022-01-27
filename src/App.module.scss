@@ -1,0 +1,14 @@
+.App {
+  margin: 0 auto;
+  width: 60%;
+  display: grid;
+  grid-gap: 5px;
+  grid-template-areas:
+    "header header"
+    "sidebar main";
+  grid-template-rows: 1fr 6fr;
+  grid-template-columns: 1fr 10fr;
+}
+
+
+

@@ -1,0 +1,19 @@
+.sidebar {
+  grid-area: sidebar;
+  background: green;
+  padding: 5px;
+  color: white;
+}
+.sidebar .item a {
+  color: white;
+  text-decoration: none;
+  transition: color 300ms ease;
+}
+.sidebar .item a:hover {
+  color: hotpink;
+}
+.sidebar .item.active a {
+  color: gold;
+}
+
+/*# sourceMappingURL=Navbar.module.css.map */

@@ -1,0 +1,21 @@
+.sidebar {
+  grid-area: sidebar;
+  background: green;
+  padding: 5px;
+  color: white;
+
+  .item {
+    a {
+      color: white;
+      text-decoration: none;
+      transition: color 300ms ease;
+      &:hover {
+        color: hotpink;
+      }
+    }
+    &.active a {
+      color: gold;
+    }
+  }
+}
+
