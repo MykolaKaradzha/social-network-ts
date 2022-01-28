@@ -10,8 +10,10 @@ export function MyPosts() {
             <button>Remove</button>
             <div>New post</div>
             <div className={s.posts}>
-                <Post/>
-                <Post/>
+                <Post message={"What`s up?"}/>
+                <Post message={"Yo"}/>
+                <Post message={"Hey Ho!"}/>
+                <Post message={"My first post!"}/>
             </div>
         </div>
     )

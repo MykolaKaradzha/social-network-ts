@@ -1,5 +1,6 @@
 import React from "react";
 import s from './Profile.module.css';
+import {MyPosts} from "./MyPosts/MyPosts";
 
 export function Profile() {
     return <main className={s.main}>
@@ -8,8 +9,6 @@ export function Profile() {
                  alt="wallpaper-lake-mountains"/>
         </div>
         <div>Info about me</div>
-        <div> My posts
-            <div>New post</div>
-        </div>
+        <MyPosts/>
     </main>;
 }

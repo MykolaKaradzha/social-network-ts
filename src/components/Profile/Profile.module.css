@@ -1,7 +1,6 @@
 .main {
   padding: 5px;
   background: gainsboro;
-  grid-area: main;
 }
 .main .wallpaper {
   width: 800px;
