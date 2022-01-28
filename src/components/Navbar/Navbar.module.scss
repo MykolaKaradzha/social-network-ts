@@ -9,11 +9,8 @@
       color: white;
       text-decoration: none;
       transition: color 300ms ease;
-      &:hover {
-        color: hotpink;
-      }
     }
-    &.active a {
+    .active {
       color: gold;
     }
   }

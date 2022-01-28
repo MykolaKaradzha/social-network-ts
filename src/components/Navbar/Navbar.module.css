@@ -9,10 +9,7 @@
   text-decoration: none;
   transition: color 300ms ease;
 }
-.sidebar .item a:hover {
-  color: hotpink;
-}
-.sidebar .item.active a {
+.sidebar .item .active {
   color: gold;
 }
 

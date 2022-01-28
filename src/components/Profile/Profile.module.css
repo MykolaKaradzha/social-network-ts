@@ -1,10 +1,6 @@
-.main {
-  padding: 5px;
-  background: gainsboro;
-}
-.main .wallpaper {
-  width: 800px;
-  height: 300px;
+.wallpaper {
+  width: 500px;
+  height: 200px;
 }
 
 /*# sourceMappingURL=Profile.module.css.map */
