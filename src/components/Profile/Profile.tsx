@@ -1,14 +1,12 @@
 import React from "react";
 import s from './Profile.module.css';
 import {MyPosts} from "./MyPosts/MyPosts";
+import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
+import {postsType} from "../../index";
 
-export function Profile() {
+export function Profile(props: {posts:Array<postsType>}) {
     return <main className={s.main}>
-        <div>
-            <img className={s.wallpaper} src="https://images4.alphacoders.com/602/602004.jpg"
-                 alt="wallpaper-lake-mountains"/>
-        </div>
-        <div>Info about me</div>
-        <MyPosts/>
-    </main>;
+        <ProfileInfo/>
+        <MyPosts posts={props.posts}/>
+    </main>
 }

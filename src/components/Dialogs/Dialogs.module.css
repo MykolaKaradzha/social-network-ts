@@ -1,3 +1,16 @@
-
+.dialogs {
+  color: white;
+  display: grid;
+  grid-template-columns: 2fr 10fr;
+}
+.dialogs .dialog {
+  padding: 5px;
+}
+.dialogs .active {
+  color: gold;
+}
+.dialogs .message {
+  padding: 5px;
+}
 
 /*# sourceMappingURL=Dialogs.module.css.map */
