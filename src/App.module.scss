@@ -1,4 +1,9 @@
+@import "nullstyle.scss";
+body {
+  background-color: #bdbbbb;
+}
 .app_wrapper {
+  font-size: 16px;
   margin: 0 auto;
   width: 60%;
   display: grid;
@@ -10,8 +15,9 @@
   grid-template-columns: 1fr 10fr;
   .app_wrapper_content {
     grid-arrea: content;
-    background: blueviolet;
-    padding: 5px;
+    background: #ffffff;
+    padding: 0.4rem;
+    color: #B92B27;
   }
 }
 

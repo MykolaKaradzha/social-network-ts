@@ -6,38 +6,44 @@ import s from './App.module.css';
 import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import {Settings} from "./components/Settings/Settings";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
-import {postsType, usersType} from "./index";
+
+import {StateType} from "./redux/state";
 
 
 
 
-type  propsType = {
-    posts:Array<postsType>
-    users: Array<usersType>
+type  PropsType = {
+    state: StateType
+    addPost: (newPost: string)=>void
+    removePost: (id: string) => void
 }
 
-function App(props: propsType) {
+function App(props: PropsType) {
 
     return (
-        <BrowserRouter>
+
             <div className={s.app_wrapper}>
                 <Header/>
-                <Navbar/>
+                <Navbar friends={props.state.SideBar.friends}/>
                 <div className={s.app_wrapper_content}>
                     <Routes>
-                        <Route path="/dialogs" element={<Dialogs users={props.users}/>}/>
-                        <Route path="/profile" element={<Profile posts={props.posts}/>}/>
+                        <Route path="/dialogs" element={<Dialogs users={props.state.DialogsPage.users}
+                                                                 messages={props.state.DialogsPage.messages}
+                        />}/>
+                        <Route path="/profile" element={<Profile posts={props.state.ProfilePage.posts}
+                                                                 addPost={props.addPost}
+                                                                 removePost={props.removePost}
+                        />}/>
                         <Route path="/news" element={<News/>}/>
                         <Route path="/music" element={<Music/>}/>
                         <Route path="/settings" element={<Settings/>}/>
                     </Routes>
                 </div>
             </div>
-        </BrowserRouter>
     );
 }
 

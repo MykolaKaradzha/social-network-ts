@@ -1,5 +1,5 @@
 .dialogs {
-  color: white;
+  color: #0e0d0d;
   display: grid;
   grid-template-columns: 2fr 10fr;
 }
@@ -11,6 +11,10 @@
 }
 .dialogs .message {
   padding: 5px;
+}
+.dialogs a {
+  color: #B92B27;
+  text-decoration: none;
 }
 
 /*# sourceMappingURL=Dialogs.module.css.map */

@@ -1,27 +1,39 @@
-import React from "react";
+import React, {useState} from "react";
 import s from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 
 import Message from "./Message/Message";
-import {usersType} from "../../index";
+import {MessagesType, UsersType} from "../../redux/state";
+import Input from "../UniversalComps/Input/Input";
 
 type propsType = {
-    users:Array<usersType>
+    users:Array<UsersType>
+    messages:Array<MessagesType>
 }
 
 export function Dialogs(props: propsType) {
-    const dialogItemsMapped = props.users.map(user => <DialogItem key={user.id} name={user.name} id={user.id}/>)
-    const MessagesMapped = props.users.map(user => <Message key={user.id} message={user.message}/>)
+
+    const dialogElements = props.users.map(user => <DialogItem key={user.id} name={user.name} id={user.id}/>)
+    const MessagesElements = props.messages.map(message => <Message key={message.id} message={message.message}/>)
+
+    const [message, setMessage] = useState<string>('')
+    const onClickAddPost = () => {
+        alert(message)
+        setMessage('')
+    }
+
     return (
 
-        <div className={s.dialogs}>
-            <div className={s.dialogItems}>
-                {dialogItemsMapped}
-            </div>
-            <div className={s.messages}>
-                {MessagesMapped}
-            </div>
-        </div>
+        <section className={s.dialogs}>
+            <article className={s.dialogItems}>
+                {dialogElements}
+            </article>
+            <article className={s.messages}>
+                {MessagesElements}
+            </article>
+            <button onClick={onClickAddPost}>Add</button>
+            <Input currentValue={message} setState={setMessage} placeholder={"enter your message here"}/>
+        </section>
     )
 
 }

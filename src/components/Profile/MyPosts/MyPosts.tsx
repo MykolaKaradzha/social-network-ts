@@ -1,19 +1,45 @@
-import React from "react";
-import s from './MyPosts.module.css';
+import React, {ChangeEvent, useState} from "react";
+import s from '../Profile.module.css';
 import {Post} from './Post/Post';
-import {postsType} from "../../../index";
+import {PostsType} from "../../../redux/state";
+import {Button, TextField} from "@mui/material";
 
-export function MyPosts(props: {posts:Array<postsType>}) {
 
-    const PostsMapped = props.posts.map( post=> <Post key={post.id} message={post.message} likes={post.likes} />)
+type propsType = {
+    addPost: (newPost: string)=>void
+    posts:Array<PostsType>
+    removePost: (id:string) => void
+}
+
+export const MyPosts:React.FC<propsType> = ({addPost, removePost, posts}) => {
+
+    const PostsElements = posts.map( post=> <Post key={post.id} {...post} removePost={removePost} />)
+    const [inputValue, setInputValue] = useState<string>('')
+    const [error, setError] = useState<string>('')
+    const onClickAddPost = () => {
+        if (inputValue.trim()) {
+            addPost(inputValue.trim())
+            setInputValue('')
+        } else {
+            setError("enter something, bro")
+        }
+
+    }
+    const onChangeInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        setInputValue(event.currentTarget.value);
+    }
+    const onBlurInputHandler = () => {
+        setError('')
+    }
+
     return (
         <div>
-            <textarea></textarea>
-            <button>Add</button>
-            <button>Remove</button>
+            <TextField onChange={onChangeInputHandler} value={inputValue}
+                       error={!!error} helperText={error} onBlur={onBlurInputHandler}></TextField>
+            <Button onClick={onClickAddPost} variant={'contained'} size={'small'} color={'error'}>Add Post</Button>
             <div>New post</div>
             <div className={s.posts}>
-                {PostsMapped}
+                {PostsElements}
             </div>
         </div>
     )

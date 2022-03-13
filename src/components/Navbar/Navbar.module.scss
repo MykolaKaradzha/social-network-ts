@@ -1,17 +1,29 @@
-.sidebar {
+.navbar {
   grid-area: sidebar;
-  background: green;
+  background: #100e0e;
   padding: 5px;
   color: white;
-
-  .item {
-    a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  a {
       color: white;
       text-decoration: none;
-      transition: color 300ms ease;
     }
-    .active {
+  .active {
       color: gold;
+    }
+}
+
+.sidebar {
+  padding-top: 2.5rem;
+  display: flex;
+  font-size: 0.5em;
+  div {
+    padding: 5px;
+    img {
+      border-radius: 50%;
+      width: 25px;
     }
   }
 }

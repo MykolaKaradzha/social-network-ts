@@ -74,25 +74,5 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /*--------------------*/
-body {
-  background-color: #bdbbbb;
-}
 
-.app_wrapper {
-  font-size: 16px;
-  margin: 0 auto;
-  width: 60%;
-  display: grid;
-  grid-gap: 5px;
-  grid-template-areas: "header header" "sidebar content";
-  grid-template-rows: 1fr 6fr;
-  grid-template-columns: 1fr 10fr;
-}
-.app_wrapper .app_wrapper_content {
-  grid-arrea: content;
-  background: #ffffff;
-  padding: 0.4rem;
-  color: #B92B27;
-}
-
-/*# sourceMappingURL=App.module.css.map */
+/*# sourceMappingURL=nullstyle.css.map */

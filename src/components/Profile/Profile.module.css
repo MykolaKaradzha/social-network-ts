@@ -3,4 +3,12 @@
   grid-area: main;
 }
 
+.item {
+  padding: 20px;
+}
+.item img {
+  width: 100px;
+  border-radius: 50%;
+}
+
 /*# sourceMappingURL=Profile.module.css.map */
