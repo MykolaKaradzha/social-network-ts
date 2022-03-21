@@ -1,5 +1,4 @@
 import {v1} from "uuid";
-import {reRenderEntireTree} from "../render";
 
 export type UsersType = {
     id: string
@@ -74,6 +73,13 @@ export const state:StateType = {
             ]
     }
 }
+
+let reRenderEntireTree = (state:StateType) => {}
+export const subscriber = (observer: (state:StateType) => void) => {
+    reRenderEntireTree = observer;
+    debugger;
+}
+
 export const addPost = (newText: string) => {
     state.ProfilePage.posts.unshift({id: v1(), message: newText, likes: 0})
     updatePost('');
