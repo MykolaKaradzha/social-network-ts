@@ -20,6 +20,7 @@ type DialogsPagetype = {
 }
 type ProfilePagetype = {
     posts: Array<PostsType>
+    newPostText:string
 }
 
 export type PersonType = {
@@ -63,6 +64,7 @@ export const state:StateType = {
             {id: v1(), message: "Rammstein", likes: 15},
             {id: v1(), message: "Jack White", likes: 16},
         ],
+        newPostText: 'It-kamasutra'
     },
     SideBar: {
         friends: [
@@ -72,13 +74,14 @@ export const state:StateType = {
             ]
     }
 }
-export const addPost = (newMessage: string) => {
-    let newPost:PostsType = {
-        id: v1(),
-        message: newMessage,
-        likes: 0
-    }
-    state.ProfilePage.posts.unshift(newPost)
+export const addPost = (newText: string) => {
+    state.ProfilePage.posts.unshift({id: v1(), message: newText, likes: 0})
+    updatePost('');
+    reRenderEntireTree(state)
+}
+
+export const updatePost = (updatedText: string) => {
+    state.ProfilePage.newPostText = updatedText
     reRenderEntireTree(state)
 
 }

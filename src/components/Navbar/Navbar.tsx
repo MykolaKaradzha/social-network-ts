@@ -1,20 +1,84 @@
 import React from "react";
-import s from './Navbar.module.css';
-import {NavLink} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import Sidebar from "./SideBar/Sidebar";
 import {FriendsType} from "../../redux/state";
+import {
+    Divider,
+    Drawer,
+    IconButton,
+    List,
+    ListItem,
+    ListItemButton,
+    ListItemText,
+    styled,
+    useTheme
+} from "@mui/material";
+import {ChevronLeft, ChevronRight} from "@mui/icons-material";
+import {DrawerHeader, drawerWidth} from "../../App";
 
 
 
-export function Navbar(props: FriendsType) {
-    const classNameForNavLink = (navData:any) => navData.isActive ? s.active : ''
+type PropsType = FriendsType & {
+    isNavbarOpen: boolean
+    closeNavbar: () => void
+}
 
-    return <nav className={s.navbar}>
-        <div className={s.item}><NavLink to="/profile" className={classNameForNavLink}>Profile</NavLink></div>
-        <div className={s.item}><NavLink to="/dialogs" className={classNameForNavLink}>Dialogs</NavLink></div>
-        <div className={s.item}><NavLink to="/news" className={classNameForNavLink}>News</NavLink></div>
-        <div className={s.item}><NavLink to="/music" className={classNameForNavLink}>Music</NavLink></div>
-        <div className={s.item}><NavLink to="/settings" className={classNameForNavLink}>Settings</NavLink></div>
-        <Sidebar friends={props.friends}/>
-    </nav>;
+export const Navbar: React.FC<PropsType> = ({isNavbarOpen, closeNavbar, friends}) => {
+    const theme = useTheme();
+    const navigate = useNavigate()
+    return (
+        <Drawer
+            variant={'persistent'}
+            anchor="left"
+            open={isNavbarOpen}
+            sx={{
+                width: drawerWidth,
+                flexShrink: 0,
+                '& .MuiDrawer-paper': {
+                    width: drawerWidth,
+                    boxSizing: 'border-box',
+                },
+            }}
+        >
+            <DrawerHeader>
+                <IconButton onClick={closeNavbar}>
+                    {theme.direction === 'ltr' ? <ChevronLeft/> : <ChevronRight/>}
+                </IconButton>
+            </DrawerHeader>
+            <Divider />
+                <List>
+                    <ListItem disablePadding>
+                        <ListItemButton onClick={() => navigate("/profile", {replace: true})}>
+                            <ListItemText primary="Profile"/>
+                        </ListItemButton>
+                    </ListItem>
+                    <Divider />
+                    <ListItem disablePadding>
+                        <ListItemButton onClick={() => navigate("/dialogs", {replace: true})}>
+                            <ListItemText primary="Dialogs"/>
+                        </ListItemButton>
+                    </ListItem>
+                    <Divider />
+                    <ListItem disablePadding>
+                        <ListItemButton onClick={() => navigate("/news", {replace: true})}>
+                            <ListItemText primary="News"/>
+                        </ListItemButton>
+                    </ListItem>
+                    <Divider />
+                    <ListItem disablePadding>
+                        <ListItemButton onClick={() => navigate("/music", {replace: true})}>
+                            <ListItemText primary="Music"/>
+                        </ListItemButton>
+                    </ListItem>
+                    <Divider />
+                    <ListItem disablePadding>
+                        <ListItemButton onClick={() => navigate("/settings", {replace: true})}>
+                            <ListItemText primary="Settings"/>
+                        </ListItemButton>
+                    </ListItem>
+                </List>
+        </Drawer>
+
+    )
+
 }

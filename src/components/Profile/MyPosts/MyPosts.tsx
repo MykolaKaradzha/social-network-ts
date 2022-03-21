@@ -2,31 +2,31 @@ import React, {ChangeEvent, useState} from "react";
 import s from '../Profile.module.css';
 import {Post} from './Post/Post';
 import {PostsType} from "../../../redux/state";
-import {Button, TextField} from "@mui/material";
+import {Button, List, TextField} from "@mui/material";
 
 
 type propsType = {
     addPost: (newPost: string)=>void
     posts:Array<PostsType>
     removePost: (id:string) => void
+    newTextPost: string
+    updatePost: (updatedText: string) => void
 }
 
-export const MyPosts:React.FC<propsType> = ({addPost, removePost, posts}) => {
+export const MyPosts:React.FC<propsType> = ({addPost, removePost, posts, newTextPost, updatePost}) => {
 
     const PostsElements = posts.map( post=> <Post key={post.id} {...post} removePost={removePost} />)
-    const [inputValue, setInputValue] = useState<string>('')
     const [error, setError] = useState<string>('')
     const onClickAddPost = () => {
-        if (inputValue.trim()) {
-            addPost(inputValue.trim())
-            setInputValue('')
+        if (newTextPost.trim()) {
+            addPost(newTextPost.trim())
         } else {
             setError("enter something, bro")
         }
 
     }
     const onChangeInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        setInputValue(event.currentTarget.value);
+        updatePost(event.currentTarget.value);
     }
     const onBlurInputHandler = () => {
         setError('')
@@ -34,13 +34,17 @@ export const MyPosts:React.FC<propsType> = ({addPost, removePost, posts}) => {
 
     return (
         <div>
-            <TextField onChange={onChangeInputHandler} value={inputValue}
+            <TextField onChange={onChangeInputHandler} value={newTextPost} size={'small'}
                        error={!!error} helperText={error} onBlur={onBlurInputHandler}></TextField>
-            <Button onClick={onClickAddPost} variant={'contained'} size={'small'} color={'error'}>Add Post</Button>
+            <Button onClick={onClickAddPost}
+                    variant={'text'}
+                    color={'error'}
+                    sx={{ml: 5}}
+            >Add Post</Button>
             <div>New post</div>
-            <div className={s.posts}>
+            <List>
                 {PostsElements}
-            </div>
+            </List>
         </div>
     )
 }
