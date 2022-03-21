@@ -1,7 +1,6 @@
 import React from "react";
 import {useNavigate} from "react-router-dom";
-import Sidebar from "./SideBar/Sidebar";
-import {FriendsType} from "../../redux/state";
+import {FriendsType} from "../../redux/store";
 import {
     Divider,
     Drawer,
@@ -10,7 +9,6 @@ import {
     ListItem,
     ListItemButton,
     ListItemText,
-    styled,
     useTheme
 } from "@mui/material";
 import {ChevronLeft, ChevronRight} from "@mui/icons-material";

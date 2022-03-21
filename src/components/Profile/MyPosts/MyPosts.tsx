@@ -1,7 +1,6 @@
 import React, {ChangeEvent, useState} from "react";
-import s from '../Profile.module.css';
 import {Post} from './Post/Post';
-import {PostsType} from "../../../redux/state";
+import {PostsType} from "../../../redux/store";
 import {Button, List, TextField} from "@mui/material";
 
 

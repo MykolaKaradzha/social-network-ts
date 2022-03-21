@@ -1,9 +1,8 @@
 import React, {useState} from "react";
 import s from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
-
 import Message from "./Message/Message";
-import {MessagesType, UsersType} from "../../redux/state";
+import {MessagesType, UsersType} from "../../redux/store";
 import Input from "../UniversalComps/Input/Input";
 
 type propsType = {

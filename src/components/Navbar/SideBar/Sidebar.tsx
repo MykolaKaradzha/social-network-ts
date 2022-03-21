@@ -1,5 +1,5 @@
 import React from 'react';
-import {FriendsType} from "../../../redux/state";
+import {FriendsType} from "../../../redux/store";
 import s from '../Navbar.module.css'
 import {NavLink} from "react-router-dom";
 

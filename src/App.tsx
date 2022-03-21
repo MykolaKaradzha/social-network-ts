@@ -7,13 +7,14 @@ import {Route, Routes} from "react-router-dom";
 import {Settings} from "./components/Settings/Settings";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
-import {StateType} from "./redux/state";
-import {Box, Container, styled} from "@mui/material";
+import {StateType} from "./redux/store";
+import {Box, styled} from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 
 export const drawerWidth = 240;
 
-const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
+const Main = styled('main', { shouldForwardProp: (prop) =>
+        prop !== 'open' })<{
     isNavbarOpen?: boolean;
 }>(({ theme, isNavbarOpen }) => ({
     flexGrow: 1,
