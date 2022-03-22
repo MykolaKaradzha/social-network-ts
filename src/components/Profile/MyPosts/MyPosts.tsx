@@ -1,31 +1,29 @@
 import React, {ChangeEvent, useState} from "react";
 import {Post} from './Post/Post';
-import {PostsType} from "../../../redux/store";
+import {DispatchType, PostsType} from "../../../redux/store";
 import {Button, List, TextField} from "@mui/material";
 
 
 type propsType = {
-    addPost: (newPost: string)=>void
     posts:Array<PostsType>
-    removePost: (id:string) => void
-    newTextPost: string
-    updatePost: (updatedText: string) => void
+    dispatch: (action: DispatchType) => void
+    newPostText: string
+
 }
 
-export const MyPosts:React.FC<propsType> = ({addPost, removePost, posts, newTextPost, updatePost}) => {
+export const MyPosts:React.FC<propsType> = ({ posts, dispatch, newPostText}) => {
 
-    const PostsElements = posts.map( post=> <Post key={post.id} {...post} removePost={removePost} />)
+    const PostsElements = posts.map( post=> <Post key={post.id} {...post} dispatch={(dispatch)} />)
     const [error, setError] = useState<string>('')
     const onClickAddPost = () => {
-        if (newTextPost.trim()) {
-            addPost(newTextPost.trim())
+        if (newPostText.trim()) {
+            dispatch({title: 'ADD-POST',});
         } else {
             setError("enter something, bro")
         }
-
     }
     const onChangeInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        updatePost(event.currentTarget.value);
+            dispatch({title: 'UPDATE-POST', updatedText: event.currentTarget.value});
     }
     const onBlurInputHandler = () => {
         setError('')
@@ -33,10 +31,10 @@ export const MyPosts:React.FC<propsType> = ({addPost, removePost, posts, newText
 
     return (
         <div>
-            <TextField onChange={onChangeInputHandler} value={newTextPost} size={'small'}
+            <TextField onChange={onChangeInputHandler} value={newPostText} size={'small'}
                        error={!!error} helperText={error} onBlur={onBlurInputHandler}></TextField>
             <Button onClick={onClickAddPost}
-                    variant={'text'}
+                    variant={'contained'}
                     color={'error'}
                     sx={{ml: 5}}
             >Add Post</Button>

@@ -3,11 +3,11 @@ import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
-import {Route, Routes} from "react-router-dom";
+import {Navigate, Route, Routes} from "react-router-dom";
 import {Settings} from "./components/Settings/Settings";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
-import {StateType} from "./redux/store";
+import {DispatchType, StateType} from "./redux/store";
 import {Box, styled} from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 
@@ -44,9 +44,7 @@ export const DrawerHeader = styled('div')(({ theme }) => ({
 
 type  PropsType = {
     state: StateType
-    addPost: (newPost: string) => void
-    removePost: (id: string) => void
-    updatePost: (updatedText: string) => void
+    dispatch: (action: DispatchType) => void
 }
 
 function App(props: PropsType) {
@@ -62,14 +60,15 @@ function App(props: PropsType) {
             <Main isNavbarOpen={isNavbarOpen}>
                 <DrawerHeader/>
                     <Routes>
+                        <Route path="/" element={<Navigate to='/profile'/>}/>
+
+
                         <Route path="/dialogs" element={<Dialogs users={props.state.DialogsPage.users}
                                                                  messages={props.state.DialogsPage.messages}
                         />}/>
                         <Route path="/profile" element={<Profile posts={props.state.ProfilePage.posts}
-                                                                 addPost={props.addPost}
-                                                                 removePost={props.removePost}
-                                                                 newTextPost={props.state.ProfilePage.newPostText}
-                                                                 updatePost={props.updatePost}
+                                                                 newPostText={props.state.ProfilePage.newPostText}
+                                                                 dispatch={props.dispatch}
                         />}/>
                         <Route path="/news" element={<News/>}/>
                         <Route path="/music" element={<Music/>}/>

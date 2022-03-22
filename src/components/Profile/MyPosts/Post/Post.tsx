@@ -1,5 +1,5 @@
 import React from "react";
-import {PostsType} from "../../../../redux/store";
+import {DispatchType, PostsType} from "../../../../redux/store";
 import {
     Card,
     CardActions,
@@ -11,13 +11,15 @@ import {
 import {Delete} from "@mui/icons-material";
 
 
-type PropsType = PostsType & { removePost: (id: string) => void }
+type PropsType = PostsType & {
+    dispatch: (action: DispatchType) => void
+}
 
 
-export const Post: React.FC<PropsType> = ({message, id, likes, removePost}) => {
+export const Post: React.FC<PropsType> = ({message, id, likes, dispatch}) => {
 
     const onClickRemovePostHandler = () => {
-        removePost(id)
+        dispatch({title: 'REMOVE-POST', id})
     }
     return (
         <>

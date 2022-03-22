@@ -41,15 +41,32 @@ export type StateType = {
 export type StoreType = {
     _state: StateType
     getState: () => StateType
-    _callSubscriber: (store: StoreType) => void
-    subscriber: (observer: (store: StoreType) => void) => void
-    addPost: (newText: string) => void
-    updatePost : (updatedText: string) => void
-    removePost : (id: string) => void
+    _callSubscriber: () => void
+    subscriber: (observer: () => void) => void
+    // addPost: (newText: string) => void
+    // updatePost : (updatedText: string) => void
+    // removePost : (id: string) => void
+    dispatch: (action: DispatchType) => void
+}
+
+export type DispatchType = AddPostACType | UpdatePostACType | RemovePostACType
+
+type AddPostACType = {
+    title: 'ADD-POST'
+}
+type UpdatePostACType = {
+    title: 'UPDATE-POST'
+    updatedText: string
+}
+type RemovePostACType = {
+    title: 'REMOVE-POST'
+    id: string
 }
 
 
-export const store:StoreType = {
+
+
+export const store: StoreType = {
     _state: {
         DialogsPage: {
             users: [
@@ -96,27 +113,48 @@ export const store:StoreType = {
             ]
         }
     },
-    getState () {
+    getState() {
         return this._state;
     },
-    _callSubscriber (store: StoreType) {},
-    subscriber (observer: (store: StoreType) => void) {
+    _callSubscriber() {
+    },
+    subscriber(observer: () => void) {
         this._callSubscriber = observer;
 
     },
-    addPost (newText: string) {
-        this._state.ProfilePage.posts.unshift({id: v1(), message: newText, likes: 0})
-        this.updatePost('');
-        this._callSubscriber(store)
-    },
-    updatePost (updatedText: string) {
-        this._state.ProfilePage.newPostText = updatedText
-        this._callSubscriber(store)
-    },
-    removePost (id: string) {
-        this._state.ProfilePage.posts = this._state.ProfilePage.posts.filter(post=> post.id !== id);
-        this._callSubscriber(store)
+    dispatch(action: DispatchType) {
+        switch (action.title) {
+            case 'ADD-POST':
+                this._state.ProfilePage.posts.unshift(
+                    {id: v1(), message: this._state.ProfilePage.newPostText, likes: 0});
+                this._state.ProfilePage.newPostText = ''
+                this._callSubscriber();
+                break
+            case "UPDATE-POST":
+                this._state.ProfilePage.newPostText = action.updatedText;
+                this._callSubscriber();
+                break
+            case "REMOVE-POST":
+                this._state.ProfilePage.posts = this._state.ProfilePage.posts.filter(post => post.id !== action.id);
+                this._callSubscriber()
+                break
+            default:
+                this._callSubscriber();
+                break
+        }
+        // addPost (newText: string) {
+        //     this._state.ProfilePage.posts.unshift({id: v1(), message: newText, likes: 0})
+        //     this.updatePost('');
+        //     this._callSubscriber(store)
+        // },
+        // updatePost (updatedText: string) {
+        //     this._state.ProfilePage.newPostText = updatedText
+        //     this._callSubscriber(store)
+        // },
+        // removePost (id: string) {
+        //     this._state.ProfilePage.posts = this._state.ProfilePage.posts.filter(post=> post.id !== id);
+        //     this._callSubscriber(store)
+        // }
     }
 }
-
 

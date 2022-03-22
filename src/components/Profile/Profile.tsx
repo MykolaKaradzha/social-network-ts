@@ -2,20 +2,19 @@ import React from "react";
 import s from './Profile.module.css';
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {PostsType} from "../../redux/store";
+import {DispatchType, PostsType} from "../../redux/store";
 
 type propsType = {
-    addPost: (newPost: string)=>void
     posts:Array<PostsType>
-    removePost: (id: string) => void
-    newTextPost: string
-    updatePost: (updatedText: string) => void
+    dispatch: (action: DispatchType) => void
+    newPostText: string
+
+
 }
 
 export function Profile(props:propsType ) {
     return <main className={s.main}>
         <ProfileInfo/>
-        <MyPosts posts={props.posts} addPost={props.addPost}
-                 removePost={props.removePost} newTextPost={props.newTextPost} updatePost={props.updatePost}/>
+        <MyPosts posts={props.posts} newPostText={props.newPostText} dispatch={props.dispatch}/>
     </main>
 }
