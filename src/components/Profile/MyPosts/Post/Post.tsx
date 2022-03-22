@@ -1,5 +1,5 @@
 import React from "react";
-import {DispatchType, PostsType} from "../../../../redux/store";
+import {DispatchType, PostsType, RemovePostAC} from "../../../../redux/store";
 import {
     Card,
     CardActions,
@@ -19,7 +19,7 @@ type PropsType = PostsType & {
 export const Post: React.FC<PropsType> = ({message, id, likes, dispatch}) => {
 
     const onClickRemovePostHandler = () => {
-        dispatch({title: 'REMOVE-POST', id})
+        dispatch(RemovePostAC(id))
     }
     return (
         <>

@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useState} from "react";
 import {Post} from './Post/Post';
-import {DispatchType, PostsType} from "../../../redux/store";
+import {AddPostAC, DispatchType, PostsType, UpdatePostAC} from "../../../redux/store";
 import {Button, List, TextField} from "@mui/material";
 
 
@@ -17,13 +17,13 @@ export const MyPosts:React.FC<propsType> = ({ posts, dispatch, newPostText}) => 
     const [error, setError] = useState<string>('')
     const onClickAddPost = () => {
         if (newPostText.trim()) {
-            dispatch({title: 'ADD-POST',});
+            dispatch(AddPostAC());
         } else {
             setError("enter something, bro")
         }
     }
     const onChangeInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
-            dispatch({title: 'UPDATE-POST', updatedText: event.currentTarget.value});
+            dispatch(UpdatePostAC(event.currentTarget.value));
     }
     const onBlurInputHandler = () => {
         setError('')

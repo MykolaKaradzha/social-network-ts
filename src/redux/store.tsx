@@ -51,19 +51,28 @@ export type StoreType = {
 
 export type DispatchType = AddPostACType | UpdatePostACType | RemovePostACType
 
-type AddPostACType = {
-    title: 'ADD-POST'
-}
-type UpdatePostACType = {
-    title: 'UPDATE-POST'
-    updatedText: string
-}
-type RemovePostACType = {
-    title: 'REMOVE-POST'
-    id: string
-}
+type AddPostACType = ReturnType<typeof AddPostAC>;
+type UpdatePostACType = ReturnType<typeof UpdatePostAC>;
+type RemovePostACType = ReturnType<typeof RemovePostAC>;
 
+export const AddPostAC = () => (
+    {title: 'ADD-POST'} as const
+);
 
+export const UpdatePostAC = (updatedText: string) => ({
+        title: 'UPDATE-POST',
+        payload: {
+            updatedText
+        }
+    } as const
+)
+export const RemovePostAC = (id: string) => ({
+        title: 'REMOVE-POST',
+        payload: {
+            id
+        }
+    } as const
+)
 
 
 export const store: StoreType = {
@@ -131,11 +140,11 @@ export const store: StoreType = {
                 this._callSubscriber();
                 break
             case "UPDATE-POST":
-                this._state.ProfilePage.newPostText = action.updatedText;
+                this._state.ProfilePage.newPostText = action.payload.updatedText
                 this._callSubscriber();
                 break
             case "REMOVE-POST":
-                this._state.ProfilePage.posts = this._state.ProfilePage.posts.filter(post => post.id !== action.id);
+                this._state.ProfilePage.posts = this._state.ProfilePage.posts.filter(post => post.id !== action.payload.id);
                 this._callSubscriber()
                 break
             default:

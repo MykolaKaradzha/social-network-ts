@@ -8,7 +8,7 @@ import {Settings} from "./components/Settings/Settings";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {DispatchType, StateType} from "./redux/store";
-import {Box, styled} from "@mui/material";
+import {Box, Container, styled} from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 
 export const drawerWidth = 240;
@@ -55,6 +55,7 @@ function App(props: PropsType) {
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
+            <Container maxWidth={"md"}>
             <Header openNavbar={openNavbar} isNavbarOpen={isNavbarOpen}/>
             <Navbar friends={props.state.SideBar.friends} isNavbarOpen={isNavbarOpen} closeNavbar={closeNavbar}/>
             <Main isNavbarOpen={isNavbarOpen}>
@@ -75,6 +76,7 @@ function App(props: PropsType) {
                         <Route path="/settings" element={<Settings/>}/>
                     </Routes>
             </Main>
+            </Container>
         </Box>
     );
 }
