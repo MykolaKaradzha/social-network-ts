@@ -1,18 +1,24 @@
-.dialogs {
-  color: #0e0d0d;
-  display: grid;
-  grid-template-columns: 2fr 10fr;
-  .dialog {
-    padding: 5px
-  }
-  .active {
-    color: gold;
-  }
-  .message {
-    padding: 5px;
-  }
-  a {
-    color: #B92B27;
-    text-decoration: none;
-  }
+//.dialogs {
+//  color: #0e0d0d;
+//  display: grid;
+//  grid-template-columns: 2fr 10fr;
+//  .dialog {
+//    padding: 5px
+//  }
+//  .active {
+//    color: gold;
+//  }
+//  .message {
+//    padding: 5px;
+//  }
+//  a {
+//    color: #B92B27;
+//    text-decoration: none;
+//  }
+//}
+.tableWrapper {
+  width: 60rem;
+}
+.controls {
+  padding-top: 3rem;
 }

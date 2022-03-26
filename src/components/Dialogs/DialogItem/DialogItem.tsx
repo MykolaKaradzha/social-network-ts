@@ -1,6 +1,7 @@
 import s from "../Dialogs.module.css";
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import React from "react";
+import {Button, Divider, ListItem, ListItemButton, ListItemText, TableCell, TableRow} from "@mui/material";
 
 type propsType = {
     id: string
@@ -8,10 +9,11 @@ type propsType = {
 }
 
 export const DialogItem = (props: propsType) => {
-    const path = `dialogs/${props.id}`
+    const navigate = useNavigate();
+    const path = `dialogs/${props.id}`;
     return (
-        <div className={s.dialog}>
-            <NavLink to={path}>{props.name}</NavLink>
-        </div>
+            <TableCell>
+                <Button onClick={() => navigate(path)}>{props.name}</Button>
+            </TableCell>
     )
 }

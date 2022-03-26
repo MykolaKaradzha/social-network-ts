@@ -1,20 +1,9 @@
-.dialogs {
-  color: #0e0d0d;
-  display: grid;
-  grid-template-columns: 2fr 10fr;
+.tableWrapper {
+  width: 60rem;
 }
-.dialogs .dialog {
-  padding: 5px;
-}
-.dialogs .active {
-  color: gold;
-}
-.dialogs .message {
-  padding: 5px;
-}
-.dialogs a {
-  color: #B92B27;
-  text-decoration: none;
+
+.controls {
+  padding-top: 3rem;
 }
 
 /*# sourceMappingURL=Dialogs.module.css.map */

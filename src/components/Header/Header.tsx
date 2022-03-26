@@ -1,6 +1,5 @@
 import React from "react";
 import { Button, IconButton, styled, Toolbar, Typography} from "@mui/material";
-import {Menu} from "@mui/icons-material";
 import {drawerWidth} from "../../App";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import MenuIcon from "@mui/icons-material/Menu";
@@ -12,16 +11,16 @@ type PropsType = {
     isNavbarOpen: boolean
 }
 interface AppBarProps extends MuiAppBarProps {
-    isNavbarOpen?: boolean;
+    isnavbaropen?: boolean;
 }
 const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== 'open',
-})<AppBarProps>(({ theme, isNavbarOpen }) => ({
+})<AppBarProps>(({ theme, isnavbaropen }) => ({
     transition: theme.transitions.create(['margin', 'width'], {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
     }),
-    ...(isNavbarOpen && {
+    ...(isnavbaropen && {
         width: `calc(100% - ${drawerWidth}px)`,
         marginLeft: `${drawerWidth}px`,
         transition: theme.transitions.create(['margin', 'width'], {
@@ -34,7 +33,7 @@ const AppBar = styled(MuiAppBar, {
 export const Header:React.FC<PropsType> = ({openNavbar, isNavbarOpen}) => {
 
     return (
-            <AppBar position={'fixed'} isNavbarOpen={isNavbarOpen}>
+            <AppBar position={'fixed'} isnavbaropen={isNavbarOpen}>
                 <Toolbar>
                     <IconButton
                         color="inherit"

@@ -1,15 +1,17 @@
 import React from 'react';
-import s from "../Dialogs.module.css";
+import {Button, Divider, ListItem, ListItemButton, ListItemText, TableCell} from "@mui/material";
 
 type propsType = {
     message: string
 }
 
+
+
 const Message = (props: propsType) => {
     return (
-            <div className={s.message}>
+            <TableCell>
                 {props.message}
-            </div>
+            </TableCell>
     );
 };
 

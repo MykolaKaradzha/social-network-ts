@@ -13,10 +13,12 @@ import CssBaseline from "@mui/material/CssBaseline";
 
 export const drawerWidth = 240;
 
-const Main = styled('main', { shouldForwardProp: (prop) =>
-        prop !== 'open' })<{
-    isNavbarOpen?: boolean;
-}>(({ theme, isNavbarOpen }) => ({
+const Main = styled('main', {
+    shouldForwardProp: (prop) =>
+        prop !== 'open'
+})<{
+    isnavbaropen?: boolean;
+}>(({theme, isnavbaropen}) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
     transition: theme.transitions.create('margin', {
@@ -24,7 +26,7 @@ const Main = styled('main', { shouldForwardProp: (prop) =>
         duration: theme.transitions.duration.leavingScreen,
     }),
     marginLeft: `-${drawerWidth}px`,
-    ...(isNavbarOpen && {
+    ...(isnavbaropen && {
         transition: theme.transitions.create('margin', {
             easing: theme.transitions.easing.easeOut,
             duration: theme.transitions.duration.enteringScreen,
@@ -33,7 +35,7 @@ const Main = styled('main', { shouldForwardProp: (prop) =>
     }),
 }));
 
-export const DrawerHeader = styled('div')(({ theme }) => ({
+export const DrawerHeader = styled('div')(({theme}) => ({
     display: 'flex',
     alignItems: 'center',
     padding: theme.spacing(0, 1),
@@ -53,13 +55,13 @@ function App(props: PropsType) {
     const openNavbar = () => setNavbar(true)
 
     return (
-        <Box sx={{ display: 'flex' }}>
-            <CssBaseline />
-            <Container maxWidth={"md"}>
+        <Box sx={{display: 'flex'}}>
+            <CssBaseline/>
             <Header openNavbar={openNavbar} isNavbarOpen={isNavbarOpen}/>
             <Navbar friends={props.state.SideBar.friends} isNavbarOpen={isNavbarOpen} closeNavbar={closeNavbar}/>
-            <Main isNavbarOpen={isNavbarOpen}>
-                <DrawerHeader/>
+            <Container maxWidth={"xl"}>
+                <Main isnavbaropen={isNavbarOpen}>
+                    <DrawerHeader/>
                     <Routes>
                         <Route path="/" element={<Navigate to='/profile'/>}/>
 
@@ -75,7 +77,7 @@ function App(props: PropsType) {
                         <Route path="/music" element={<Music/>}/>
                         <Route path="/settings" element={<Settings/>}/>
                     </Routes>
-            </Main>
+                </Main>
             </Container>
         </Box>
     );
