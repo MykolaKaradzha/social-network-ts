@@ -1,5 +1,5 @@
 import React from "react";
-import {DispatchType, PostsType, RemovePostAC} from "../../../../redux/store";
+import {DispatchType, PostsType} from "../../../../redux/store";
 import {
     Card,
     CardActions,
@@ -9,6 +9,7 @@ import {
     Typography
 } from "@mui/material";
 import {Delete} from "@mui/icons-material";
+import {RemovePostAC} from "../../../../redux/profile-reducer";
 
 
 type PropsType = PostsType & {

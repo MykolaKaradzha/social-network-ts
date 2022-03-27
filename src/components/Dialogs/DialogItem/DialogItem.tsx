@@ -12,7 +12,7 @@ export const DialogItem = (props: propsType) => {
     const navigate = useNavigate();
     const path = `dialogs/${props.id}`;
     return (
-            <TableCell>
+            <TableCell key={props.id}>
                 <Button onClick={() => navigate(path)}>{props.name}</Button>
             </TableCell>
     )

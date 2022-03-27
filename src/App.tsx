@@ -7,7 +7,7 @@ import {Navigate, Route, Routes} from "react-router-dom";
 import {Settings} from "./components/Settings/Settings";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
-import {DispatchType, StateType} from "./redux/store";
+import { DispatchType, StateType} from "./redux/store";
 import {Box, Container, styled} from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 
@@ -68,9 +68,9 @@ function App(props: PropsType) {
 
                         <Route path="/dialogs" element={<Dialogs users={props.state.DialogsPage.users}
                                                                  messages={props.state.DialogsPage.messages}
+                                                                 dispatch={props.dispatch}
                         />}/>
                         <Route path="/profile" element={<Profile posts={props.state.ProfilePage.posts}
-                                                                 newPostText={props.state.ProfilePage.newPostText}
                                                                  dispatch={props.dispatch}
                         />}/>
                         <Route path="/news" element={<News/>}/>

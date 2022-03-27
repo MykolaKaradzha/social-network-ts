@@ -3,13 +3,14 @@ import {Button, Divider, ListItem, ListItemButton, ListItemText, TableCell} from
 
 type propsType = {
     message: string
+    id: string
 }
 
 
 
 const Message = (props: propsType) => {
     return (
-            <TableCell>
+            <TableCell key={props.id}>
                 {props.message}
             </TableCell>
     );

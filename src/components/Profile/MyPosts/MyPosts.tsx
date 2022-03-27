@@ -1,29 +1,32 @@
 import React, {ChangeEvent, useState} from "react";
 import {Post} from './Post/Post';
-import {AddPostAC, DispatchType, PostsType, UpdatePostAC} from "../../../redux/store";
+import {DispatchType, PostsType} from "../../../redux/store";
 import {Button, List, TextField} from "@mui/material";
+import {AddPostAC} from "../../../redux/profile-reducer";
 
 
 type propsType = {
     posts:Array<PostsType>
     dispatch: (action: DispatchType) => void
-    newPostText: string
+
 
 }
 
-export const MyPosts:React.FC<propsType> = ({ posts, dispatch, newPostText}) => {
+export const MyPosts:React.FC<propsType> = ({ posts, dispatch,}) => {
 
     const PostsElements = posts.map( post=> <Post key={post.id} {...post} dispatch={(dispatch)} />)
     const [error, setError] = useState<string>('')
+    const [postText, setPostText] = useState<string>('')
     const onClickAddPost = () => {
-        if (newPostText.trim()) {
-            dispatch(AddPostAC());
+        if (postText.trim()) {
+            dispatch(AddPostAC(postText.trim()));
+            setPostText('')
         } else {
             setError("enter something, bro")
         }
     }
     const onChangeInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
-            dispatch(UpdatePostAC(event.currentTarget.value));
+            setPostText(event.currentTarget.value);
     }
     const onBlurInputHandler = () => {
         setError('')
@@ -31,7 +34,7 @@ export const MyPosts:React.FC<propsType> = ({ posts, dispatch, newPostText}) => 
 
     return (
         <div>
-            <TextField onChange={onChangeInputHandler} value={newPostText} size={'small'}
+            <TextField onChange={onChangeInputHandler} value={postText} size={'small'}
                        error={!!error} helperText={error} onBlur={onBlurInputHandler}></TextField>
             <Button onClick={onClickAddPost}
                     variant={'contained'}

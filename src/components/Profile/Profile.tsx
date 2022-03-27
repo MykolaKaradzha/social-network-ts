@@ -7,7 +7,6 @@ import {DispatchType, PostsType} from "../../redux/store";
 type propsType = {
     posts:Array<PostsType>
     dispatch: (action: DispatchType) => void
-    newPostText: string
 
 
 }
@@ -15,6 +14,6 @@ type propsType = {
 export function Profile(props:propsType ) {
     return <main className={s.main}>
         <ProfileInfo/>
-        <MyPosts posts={props.posts} newPostText={props.newPostText} dispatch={props.dispatch}/>
+        <MyPosts posts={props.posts} dispatch={props.dispatch}/>
     </main>
 }
