@@ -7,9 +7,14 @@ import {Navigate, Route, Routes} from "react-router-dom";
 import {Settings} from "./components/Settings/Settings";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
-import { DispatchType, StateType} from "./redux/store";
 import {Box, Container, styled} from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
+import {ActionType, StateType} from "./redux/redux-store";
+
+
+
+
+
 
 export const drawerWidth = 240;
 
@@ -46,7 +51,7 @@ export const DrawerHeader = styled('div')(({theme}) => ({
 
 type  PropsType = {
     state: StateType
-    dispatch: (action: DispatchType) => void
+    dispatch: (action: ActionType) => void
 }
 
 function App(props: PropsType) {

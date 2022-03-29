@@ -1,55 +1,16 @@
 import {v1} from "uuid";
-import {AddPostACType, ProfileReducer, RemovePostACType} from "./profile-reducer";
-import {AddMessageACType, DialogsReducer} from "./dialogs-reducer";
+import {ProfileReducer} from "./profile-reducer";
+import {DialogsReducer} from "./dialogs-reducer";
 import {SideBarReducer} from "./sidebar-reducer";
+import {ActionType, StateType} from "./redux-store";
 
-export type UsersType = {
-    id: string
-    name: string
-}
-export type MessagesType = {
-    id: string
-    message: string
-}
-export type PostsType = {
-    id: string
-    message: string;
-    likes: number;
-}
-export type DialogsPagetype = {
-    users: Array<UsersType>
-    messages: Array<MessagesType>
-}
-export type ProfilePagetype = {
-    posts: Array<PostsType>
-}
-
-export type PersonType = {
-    id: string
-    name: string
-    avatar: string
-}
-export type FriendsType = {
-    friends: Array<PersonType>
-}
-
-export type StateType = {
-    ProfilePage: ProfilePagetype
-    DialogsPage: DialogsPagetype
-    SideBar: FriendsType
-
-}
-
-
-
-export type DispatchType = AddPostACType | RemovePostACType |  AddMessageACType
 
 export type StoreType = {
     _state: StateType
     getState: () => StateType
     _callSubscriber: () => void
     subscriber: (observer: () => void) => void
-    dispatch: (action: DispatchType) => void
+    dispatch: (action: ActionType) => void
 }
 
 
@@ -108,7 +69,7 @@ export const store: StoreType = {
         this._callSubscriber = observer;
 
     },
-    dispatch(action: DispatchType) {
+    dispatch(action: ActionType) {
         this._state.ProfilePage = ProfileReducer(this._state.ProfilePage, action)
         this._state.DialogsPage = DialogsReducer(this._state.DialogsPage, action)
         this._state.SideBar = SideBarReducer(this._state.SideBar, action)

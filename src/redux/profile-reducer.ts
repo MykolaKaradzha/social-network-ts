@@ -1,13 +1,6 @@
-import {ProfilePagetype} from "./store";
 import {v1} from "uuid";
-import {AddMessageACType} from "./dialogs-reducer";
+import {ActionType, ProfilePagetype} from "./redux-store";
 
-
-type ActionType = AddPostACType | RemovePostACType | AddMessageACType
-
-export type AddPostACType = ReturnType<typeof AddPostAC>;
-
-export type RemovePostACType = ReturnType<typeof RemovePostAC>;
 
 export const AddPostAC = (newPostText: string) => ({
         type: 'ADD-POST',
@@ -23,7 +16,17 @@ export const RemovePostAC = (id: string) => ({
     } as const
 )
 
-export const ProfileReducer = (state:ProfilePagetype, action: ActionType) => {
+const initialState = {
+    posts: [
+        {id: v1(), message: "Pantera", likes: 12},
+        {id: v1(), message: "Metallica", likes: 13},
+        {id: v1(), message: "Rammstein", likes: 15},
+        {id: v1(), message: "Jack White", likes: 16},
+    ],
+}
+
+
+export const ProfileReducer = (state:ProfilePagetype = initialState, action: ActionType) => {
     switch (action.type) {
         case 'ADD-POST':
             state.posts.unshift({id: v1(), message: action.payload.newPostText, likes: 0})

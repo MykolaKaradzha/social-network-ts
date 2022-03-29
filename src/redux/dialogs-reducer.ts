@@ -1,11 +1,6 @@
-import {DialogsPagetype} from "./store";
 import {v1} from "uuid";
-import {AddPostACType, RemovePostACType} from "./profile-reducer";
+import {ActionType, DialogsPagetype} from "./redux-store";
 
-
-type ActionType = AddPostACType | RemovePostACType | AddMessageACType
-
-export type AddMessageACType = ReturnType<typeof AddMessageAC>;
 
 export const AddMessageAC = (messageText: string) => ({
         type: 'ADD-MESSAGE',
@@ -13,7 +8,25 @@ export const AddMessageAC = (messageText: string) => ({
     } as const
 )
 
-export const DialogsReducer = (state: DialogsPagetype, action: ActionType) => {
+const initialState = {
+    users: [
+        {id: v1(), name: "Mykola"},
+        {id: v1(), name: "Nastya"},
+        {id: v1(), name: "Serhio"},
+        {id: v1(), name: "Denchik"},
+        {id: v1(), name: "Alexandro"},
+    ],
+    messages: [
+        {id: v1(), message: "Wazzup"},
+        {id: v1(), message: "Hola"},
+        {id: v1(), message: "Comment ça va?"},
+        {id: v1(), message: "Yo"},
+        {id: v1(), message: "Hallo"},
+    ]
+}
+
+
+export const DialogsReducer = (state: DialogsPagetype = initialState, action: ActionType) => {
     switch (action.type) {
         case "ADD-MESSAGE":
             state.messages.push({id: v1(), message: action.payload.messageText});

@@ -1,6 +1,6 @@
 import React from "react";
 import {useNavigate} from "react-router-dom";
-import {FriendsType} from "../../redux/store";
+
 import {
     Divider,
     Drawer,
@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import {ChevronLeft, ChevronRight} from "@mui/icons-material";
 import {DrawerHeader, drawerWidth} from "../../App";
+import {FriendsType} from "../../redux/redux-store";
 
 
 

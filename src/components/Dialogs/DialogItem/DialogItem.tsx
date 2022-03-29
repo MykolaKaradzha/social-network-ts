@@ -1,7 +1,7 @@
-import s from "../Dialogs.module.css";
-import {NavLink, useNavigate} from "react-router-dom";
+
+import {useNavigate} from "react-router-dom";
 import React from "react";
-import {Button, Divider, ListItem, ListItemButton, ListItemText, TableCell, TableRow} from "@mui/material";
+import {Button, TableCell} from "@mui/material";
 
 type propsType = {
     id: string
