@@ -1,7 +1,6 @@
-import React, {ChangeEvent, useState} from "react";
+import React, {ChangeEvent} from "react";
 import s from './Dialogs.module.css'
-import {DialogItem} from "./DialogItem/DialogItem";
-import Message from "./Message/Message";
+
 import {
     Button,
     Table,
@@ -12,44 +11,18 @@ import {
     TextField,
     Typography
 } from "@mui/material";
-import {AddMessageAC} from "../../redux/dialogs-reducer";
-import {ActionType, MessagesType, UsersType} from "../../redux/redux-store";
+
 
 
 type propsType = {
-    users: Array<UsersType>
-    messages: Array<MessagesType>
-    dispatch: (action: ActionType) => void
+    finalElements: JSX.Element[]
+    onClickAddMessage: () => void
+    message: string
+    onChangeHandler: (event: ChangeEvent<HTMLInputElement>) => void
 }
 
-export const Dialogs: React.FC<propsType> = ({users, messages, dispatch}) => {
+export const Dialogs: React.FC<propsType> = ({finalElements, onClickAddMessage, message, onChangeHandler}) => {
 
-    const dialogElements = users.map(user => <DialogItem key={user.id} name={user.name} id={user.id}/>)
-    const messagesElements = messages.map(message => <Message key={message.id} message={message.message}
-                                                              id={message.id}/>)
-    const finalElements = [];
-    for (let i = 0; i < messagesElements.length; i++) {
-        let el = <TableRow key={`${i} DialogsTableRow`}>
-            {dialogElements[i] ? dialogElements[i] : <TableCell></TableCell>}
-            {messagesElements[i]}
-        </TableRow>
-        finalElements.push(el)
-    }
-
-    const [message, setMessage] = useState<string>('')
-
-    const onClickAddMessage = () => {
-        if (message.trim()) {
-            dispatch(AddMessageAC(message))
-            setMessage('')
-        } else {
-            alert('enter something!')
-        }
-    }
-
-    const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        setMessage(event.currentTarget.value)
-    }
 
     return (
         <div className={s.tableWrapper}>
@@ -77,7 +50,6 @@ export const Dialogs: React.FC<propsType> = ({users, messages, dispatch}) => {
                            placeholder={"enter your message here"}/>
                 <Button onClick={onClickAddMessage} color={'error'}>Add</Button>
             </div>
-
         </div>
 
     )

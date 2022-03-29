@@ -1,23 +1,22 @@
 import React, {ChangeEvent, useState} from "react";
 import {Post} from './Post/Post';
-import {Button, List, TextField} from "@mui/material";
 import {AddPostAC} from "../../../redux/profile-reducer";
-import {ActionType, PostsType} from "../../../redux/redux-store";
 import {MyPosts} from "./MyPosts";
+import {StateType, StoreType} from "../../../redux/redux-store";
 
 
 type propsType = {
-    posts:Array<PostsType>
-    dispatch: (action: ActionType) => void
-
-
+    store:StoreType
+    state: StateType
 }
 
-export const MyPostsContainer:React.FC<propsType> = ({ posts, dispatch,}) => {
+export const MyPostsContainer:React.FC<propsType> = ({store, state}) => {
 
-    const PostsElements = posts.map( post=> <Post key={post.id} {...post} dispatch={(dispatch)} />)
-    const [error, setError] = useState<string>('')
-    const [postText, setPostText] = useState<string>('')
+    const posts = state.ProfilePage.posts;
+    const dispatch = store.dispatch;
+    const PostsElements = posts.map( post=> <Post key={post.id} {...post} dispatch={(dispatch)} />);
+    const [error, setError] = useState<string>('');
+    const [postText, setPostText] = useState<string>('');
     const onClickAddPost = () => {
         if (postText.trim()) {
             dispatch(AddPostAC(postText.trim()));
@@ -30,7 +29,7 @@ export const MyPostsContainer:React.FC<propsType> = ({ posts, dispatch,}) => {
             setPostText(event.currentTarget.value);
     }
     const onBlurInputHandler = () => {
-        setError('')
+        setError('');
     }
 
     return (<MyPosts PostsElements={PostsElements} error={error}

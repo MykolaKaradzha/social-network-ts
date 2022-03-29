@@ -41,6 +41,8 @@ export type StateType = {
     SideBar: FriendsType
 }
 
+export type StoreType = typeof store
+
 export type ActionType = ReturnType<typeof AddPostAC> | ReturnType<typeof RemovePostAC> | ReturnType<typeof AddMessageAC>
 
 const reducers = combineReducers({

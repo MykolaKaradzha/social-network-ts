@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
@@ -9,12 +8,8 @@ import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Box, Container, styled} from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
-import {ActionType, StateType} from "./redux/redux-store";
-
-
-
-
-
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import {StoreType} from "./redux/redux-store";
 
 export const drawerWidth = 240;
 
@@ -50,11 +45,12 @@ export const DrawerHeader = styled('div')(({theme}) => ({
 }));
 
 type  PropsType = {
-    state: StateType
-    dispatch: (action: ActionType) => void
+    store: StoreType
 }
 
 function App(props: PropsType) {
+
+    const state = props.store.getState();
     const [isNavbarOpen, setNavbar] = useState<boolean>(true)
     const closeNavbar = () => setNavbar(false)
     const openNavbar = () => setNavbar(true)
@@ -63,20 +59,16 @@ function App(props: PropsType) {
         <Box sx={{display: 'flex'}}>
             <CssBaseline/>
             <Header openNavbar={openNavbar} isNavbarOpen={isNavbarOpen}/>
-            <Navbar friends={props.state.SideBar.friends} isNavbarOpen={isNavbarOpen} closeNavbar={closeNavbar}/>
+            <Navbar friends={state.SideBar.friends} isNavbarOpen={isNavbarOpen} closeNavbar={closeNavbar}/>
             <Container maxWidth={"xl"}>
                 <Main isnavbaropen={isNavbarOpen}>
                     <DrawerHeader/>
                     <Routes>
                         <Route path="/" element={<Navigate to='/profile'/>}/>
 
-
-                        <Route path="/dialogs" element={<Dialogs users={props.state.DialogsPage.users}
-                                                                 messages={props.state.DialogsPage.messages}
-                                                                 dispatch={props.dispatch}
+                        <Route path="/dialogs" element={<DialogsContainer state={state} store={props.store}
                         />}/>
-                        <Route path="/profile" element={<Profile posts={props.state.ProfilePage.posts}
-                                                                 dispatch={props.dispatch}
+                        <Route path="/profile" element={<Profile store={props.store} state={state}
                         />}/>
                         <Route path="/news" element={<News/>}/>
                         <Route path="/music" element={<Music/>}/>
