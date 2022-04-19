@@ -21,6 +21,6 @@ const initialState:FriendsType = {
     ]
 }
 
-export const SideBarReducer = (state:FriendsType = initialState, action: ActionType) => {
+export const SideBarReducer = (state:FriendsType = initialState, action: ActionType) : FriendsType => {
     return state
 }

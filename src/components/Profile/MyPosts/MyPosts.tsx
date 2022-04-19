@@ -1,18 +1,29 @@
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent, useState} from "react";
 import {Button, List, TextField} from "@mui/material";
+import {Post} from "./Post/Post";
+import {AddPostAC} from "../../../redux/profile-reducer";
+import {MyPostsType} from "./MyPostsContainer";
 
-type propsType = {
-    PostsElements: JSX.Element[]
-    onChangeInputHandler: (event: ChangeEvent<HTMLInputElement>) => void
-    onClickAddPost: () => void
-    postText: string
-    error: string
-    onBlurInputHandler: () => void
-}
 
-export const MyPosts:React.FC<propsType> = ({PostsElements, onClickAddPost,
-                                                postText , onChangeInputHandler,
-                                                onBlurInputHandler, error}) => {
+
+export const MyPosts:React.FC<MyPostsType> = ({posts, addPost, removePost}) => {
+    const PostsElements = posts.map( post=> <Post key={post.id} removePost={removePost} {...post}/>);
+    const [error, setError] = useState<string>('');
+    const [postText, setPostText] = useState<string>('');
+    const onClickAddPost = () => {
+        if (postText.trim()) {
+            addPost(postText.trim())
+            setPostText('')
+        } else {
+            setError("enter something, bro")
+        }
+    }
+    const onChangeInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        setPostText(event.currentTarget.value);
+    }
+    const onBlurInputHandler = () => {
+        setError('');
+    }
     return (
         <div>
             <TextField onChange={onChangeInputHandler} value={postText} size={'small'}

@@ -16,7 +16,7 @@ export const RemovePostAC = (id: string) => ({
     } as const
 )
 
-const initialState = {
+const initialState: ProfilePagetype = {
     posts: [
         {id: v1(), message: "Pantera", likes: 12},
         {id: v1(), message: "Metallica", likes: 13},
@@ -26,15 +26,17 @@ const initialState = {
 }
 
 
-export const ProfileReducer = (state:ProfilePagetype = initialState, action: ActionType) => {
+export const ProfileReducer = (state:ProfilePagetype = initialState, action: ActionType): ProfilePagetype => {
     switch (action.type) {
         case 'ADD-POST':
-            state.posts.unshift({id: v1(), message: action.payload.newPostText, likes: 0})
-            return state;
-        case "REMOVE-POST":
-            state.posts = state.posts.filter(post => post.id !== action.payload.id);
-            return state;
+            return {...state,
+                    posts: [{id: v1(), message: action.payload.newPostText, likes: 0}, ...state.posts]}
 
+        case "REMOVE-POST":
+            return {
+                ...state,
+                posts: state.posts.filter(post => post.id !== action.payload.id)
+            }
         default:
             return state
     }

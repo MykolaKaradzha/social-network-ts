@@ -8,7 +8,7 @@ export const AddMessageAC = (messageText: string) => ({
     } as const
 )
 
-const initialState = {
+const initialState:DialogsPagetype = {
     users: [
         {id: v1(), name: "Mykola"},
         {id: v1(), name: "Nastya"},
@@ -26,11 +26,12 @@ const initialState = {
 }
 
 
-export const DialogsReducer = (state: DialogsPagetype = initialState, action: ActionType) => {
+export const DialogsReducer = (state: DialogsPagetype = initialState, action: ActionType): DialogsPagetype => {
     switch (action.type) {
         case "ADD-MESSAGE":
-            state.messages.push({id: v1(), message: action.payload.messageText});
-            return state;
+            return {...state,
+                messages: [...state.messages, {id: v1(), message: action.payload.messageText}]
+            }
         default:
             return state
     }

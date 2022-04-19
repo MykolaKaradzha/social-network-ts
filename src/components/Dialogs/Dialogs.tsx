@@ -1,6 +1,5 @@
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent, useState} from "react";
 import s from './Dialogs.module.css'
-
 import {
     Button,
     Table,
@@ -11,19 +10,37 @@ import {
     TextField,
     Typography
 } from "@mui/material";
+import {DialogItem} from "./DialogItem/DialogItem";
+import Message from "./Message/Message";
+import {DialogsType} from "./DialogsContainer";
 
 
 
-type propsType = {
-    finalElements: JSX.Element[]
-    onClickAddMessage: () => void
-    message: string
-    onChangeHandler: (event: ChangeEvent<HTMLInputElement>) => void
-}
 
-export const Dialogs: React.FC<propsType> = ({finalElements, onClickAddMessage, message, onChangeHandler}) => {
-
-
+export const Dialogs: React.FC<DialogsType> = ({users, messages, addMessage}) => {
+    const [message, setMessage] = useState<string>('')
+    const onChangeMessageHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        setMessage(event.currentTarget.value)
+    }
+    const onClickAddMessage = () => {
+        if (message.trim()) {
+            addMessage(message)
+            setMessage('')
+        } else {
+            alert('enter something!')
+        }
+    }
+    const dialogElements = users.map(user => <DialogItem key={user.id} name={user.name} id={user.id}/>)
+    const messagesElements = messages.map(message => <Message key={message.id} message={message.message}
+                                                              id={message.id}/>)
+    const finalElements = [];
+    for (let i = 0; i < messagesElements.length; i++) {
+        let el = <TableRow key={`${i} DialogsTableRow`}>
+            {dialogElements[i] ? dialogElements[i] : <TableCell></TableCell>}
+            {messagesElements[i]}
+        </TableRow>
+        finalElements.push(el)
+    }
     return (
         <div className={s.tableWrapper}>
             <Table>
@@ -46,7 +63,7 @@ export const Dialogs: React.FC<propsType> = ({finalElements, onClickAddMessage, 
                 </TableBody>
             </Table>
             <div className={s.controls}>
-                <TextField size={'small'} value={message} onChange={onChangeHandler}
+                <TextField size={'small'} value={message} onChange={onChangeMessageHandler}
                            placeholder={"enter your message here"}/>
                 <Button onClick={onClickAddMessage} color={'error'}>Add</Button>
             </div>
